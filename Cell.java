@@ -1,9 +1,7 @@
 import java.util.*;
 
 class Grid{
-    private ArrayList<Integer> position_xValues = new ArrayList<>();
-    private ArrayList<Integer> position_yValues = new ArrayList<>();
-
+   
     private int width;
     private int height;
     private boolean[][] grid;
@@ -21,8 +19,6 @@ class Grid{
     }
 
     public void setInitialLiveCell(int x_position, int y_position, boolean value){
-        this.position_xValues.add(x_position);
-        this.position_yValues.add(y_position);
         grid[x_position][y_position] = value; 
     }
 
