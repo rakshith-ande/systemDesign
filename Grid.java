@@ -1,25 +1,25 @@
 import java.util.*;
 
-class Grid{
+class Cells{
    
     private int width;
     private int height;
-    private boolean[][] grid;
+    private boolean[][] cells;
 
-    public Grid(int width, int height){
+    public Cells(int width, int height){
         this.width = width;
         this.height = height;
-        grid = new boolean[width][height];
+        cells = new boolean[width][height];
 
         for(int i=0;i<width;i++){
             for(int j=0;j<height;j++){
-                grid[i][j] = false;
+                cells[i][j] = false;
             }
         }
     }
 
     public void setInitialLiveCell(int x_position, int y_position, boolean value){
-        grid[x_position][y_position] = value; 
+        cells[x_position][y_position] = value; 
     }
 
 
@@ -30,7 +30,7 @@ class Grid{
         for(int i=x_position-1;i<=x_position+1;i++){
             for(int j=y_position-1;j<=y_position+1;j++){
                 try{
-                    if(grid[i][j]){
+                    if(cells[i][j]){
                         //System.out.println("ERROR   "+ i +", "+j);
                         count++;
                     }    
@@ -47,7 +47,7 @@ class Grid{
         System.out.println();System.out.println("INPUT:::::");
         for(int i=0;i<this.width;i++){
             for(int j=0;j<this.height;j++){
-                System.out.print(grid[i][j]+"    ");
+                System.out.print(cells[i][j]+"    ");
             }
             System.out.println();
         }
@@ -57,22 +57,22 @@ class Grid{
             for(int j=0;j<this.height;j++){
                 int liveNeighboursCount = getLiveNeighboursCount(i, j);
 
-                if(grid[i][j]){
+                if(cells[i][j]){
                     //if cell is live make the necessary actoins
                     if(liveNeighboursCount < 2){
-                        grid[i][j] = false;
+                        cells[i][j] = false;
                     }
                     if(liveNeighboursCount > 3){
-                        grid[i][j] = false;
+                        cells[i][j] = false;
                     }
                     if(liveNeighboursCount == 2 || liveNeighboursCount == 3){
-                        grid[i][j] = true;
+                        cells[i][j] = true;
                     }
                 }
                 else{
                     //if cell is dead make the necessary actoins
                     if(liveNeighboursCount == 3){
-                        grid[i][j] = true;
+                        cells[i][j] = true;
                     }
                 }
             }
@@ -82,7 +82,7 @@ class Grid{
         System.out.println();System.out.println("OUTPUT:::::");
         for(int i=0;i<this.width;i++){
             for(int j=0;j<this.height;j++){
-                System.out.print(grid[i][j]+"    ");
+                System.out.print(cells[i][j]+"    ");
             }
             System.out.println();
         }
@@ -90,7 +90,7 @@ class Grid{
 }
 
 
-class Cell{
+class Grid{
     public static void main(String[] args){
         Scanner scan = new Scanner(System.in);
 
@@ -98,7 +98,7 @@ class Cell{
         int width = scan.nextInt();
         int height = scan.nextInt();
 
-        Grid grid = new Grid(width, height);
+        Cells cells = new Cells(width, height);
         
         System.out.println("Enter how many cells are live by default");
         int nCellLiveDefault = scan.nextInt();
@@ -107,9 +107,9 @@ class Cell{
             int x = scan.nextInt();
             int y = scan.nextInt();
 
-            grid.setInitialLiveCell(x, y, true);
+            cells.setInitialLiveCell(x, y, true);
         }
 
-        while(true){grid.nextGen();}
+        while(true){cells.nextGen();}
     }
 }
